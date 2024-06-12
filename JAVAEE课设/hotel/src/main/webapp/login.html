@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link href="css/login.css" rel="stylesheet">
+</head>
+
+<body>
+<div id="loginDiv">
+    <form action="/hotel/LoginServlet" id="form" method="post" onsubmit="return login()">
+        <h1 id="loginMsg">LOGIN IN</h1>
+        <p>Account:<input id="account" name="account" type="text"></p>
+
+        <p>Password:<input id="password" name="password" type="password"></p>
+
+        <div id="subDiv">
+            <input type="submit" class="button" value="login up">
+        </div>
+    </form>
+</div>
+<script>
+    function login(){
+        var account=document.getElementById("account").value;
+        var password=document.getElementById("password").value;
+        if (account===""||password===""){
+            alert("账号或密码不能为空");
+            return false;
+        }
+        return  true;
+    }
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.xxx.mapper.AdminMapper">
+
+    <resultMap id="AdminResultMap" type="Admin">
+        <!--
+        id：完成主键字段的映射
+            column：表的列名
+            property：实体类的属性名
+        result：完成一般字段的映射
+            column：表的列名
+            property：实体类的属性名
+        -->
+        <result column="admin_name" property="adminName"></result>
+        <result column="admin_number" property="adminNumber"></result>
+        <result column="admin_phone" property="adminPhone"></result>
+        <result column="admin_idnumber" property="adminIdNumber"></result>
+        <result column="admin_accounts" property="adminAccounts"></result>
+        <result column="admin_password" property="adminPassword"></result>
+    </resultMap>
+
+    <!--
+    登录查询
+    -->
+    <select id="selctaccounts" resultMap="AdminResultMap">
+        select * from hotel.admin where admin_accounts=#{adminAccounts} and admin_password=#{adminPassword};
+    </select>
+</mapper>

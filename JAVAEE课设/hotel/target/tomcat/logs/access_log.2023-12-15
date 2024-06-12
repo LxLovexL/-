@@ -1,0 +1,4 @@
+0:0:0:0:0:0:0:1 - - [15/Dec/2023:12:40:15 +0800] "GET /hotel HTTP/1.1" 302 - http-bio-8080-exec-2 0
+0:0:0:0:0:0:0:1 - - [15/Dec/2023:12:40:15 +0800] "GET /hotel/ HTTP/1.1" 404 963 http-bio-8080-exec-3 8
+0:0:0:0:0:0:0:1 - - [15/Dec/2023:12:40:15 +0800] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-4 0
+0:0:0:0:0:0:0:1 - - [15/Dec/2023:12:40:22 +0800] "GET /hotel/login.html HTTP/1.1" 200 963 http-bio-8080-exec-5 3

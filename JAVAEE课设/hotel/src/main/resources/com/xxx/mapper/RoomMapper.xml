@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxx.mapper.RoomMapper">
+
+
+    <resultMap id="rsResultMap" type="roomStatus">
+        <result column="room_style" property="roomStyle"></result>
+        <result column="room_door" property="roomDoor"></result>
+        <result column="guest_name" property="guestName"></result>
+        <result column="guest_id" property="guestId"></result>
+        <result column="guest_phone" property="guestPhone"></result>
+        <result column="in_time" property="inTime"></result>
+        <result column="out_time" property="outTime"></result>
+    </resultMap>
+
+    <insert id="addInRoom">
+        insert into hotel.room_status values (null,#{roomStyle},#{roomDoor},
+                                              #{guestName},#{guestId},#{guestPhone},#{inTime},null)
+    </insert>
+
+    <insert id="addBackup">
+        insert into hotel.backup values (null,#{roomStyle},#{roomDoor},
+                                         #{guestName},#{guestId},#{guestPhone},#{inTime},#{outTime})
+    </insert>
+
+    <update id="updateInRoom">
+            update hotel.room_status
+            set
+            room_style=#{roomStyle},
+            room_door=#{door}
+            where room_door=#{roomDoor};
+    </update>
+
+    <update id="updateStatus">
+        update hotel.room set status=1 where door=#{door};
+    </update>
+
+    <update id="updateStatus2">
+        update hotel.room set status=0 where door=#{door};
+    </update>
+
+    <delete id="deleteTaken">
+        delete from hotel.room_status where id=#{id};
+    </delete>
+
+
+    <select id="selectAll" resultType="com.xxx.pojo.Room">
+        select *from hotel.room;
+    </select>
+
+
+
+
+    <select id="selectByCondition" resultType="com.xxx.pojo.Room">
+        select * from hotel.room
+        <where>
+        <choose>
+
+            <when test="style!=null and style!=''">
+                and style like #{style}
+            </when>
+
+            <when test="status!=null">
+                and status =#{status}
+             </when>
+
+            <when test="door!=null and door!=''">
+                and door =#{door}
+            </when>
+
+            <when test="highPrice!=null and highPrice!=''">
+                and price <![CDATA[<]]> #{highPrice}
+            </when>
+        </choose>
+        </where>
+    </select>
+
+
+    <select id="selectByDoor" resultType="com.xxx.pojo.Room">
+        select *from hotel.room where door=#{door};
+    </select>
+
+    <select id="select" resultMap="rsResultMap">
+        select *from hotel.room_status;
+    </select>
+
+    <select id="selectByCondition2" resultMap="rsResultMap">
+        select * from hotel.room_status
+        <where>
+            <choose>
+                <when test="roomDoor!=null and roomDoor!=''">
+                    room_door like #{roomDoor}
+                </when>
+
+                <when test="guestName!=null and guestName!=''">
+                    guest_name = #{guestName}
+                </when>
+
+                <when test="guestId!=null and guestId!=''">
+                    guest_id = #{guestId}
+                </when>
+
+                <when test="guestPhone!=null and guestPhone!=''">
+                    guest_phone = #{guestPhone}
+                </when>
+
+                <when test="inTime!=null and inTime!=''">
+                    in_time = #{inTime}
+                </when>
+
+            </choose>
+        </where>
+
+    </select>
+
+    <select id="selectById"  resultMap="rsResultMap">
+        select *from hotel.room_status where id=#{id};
+    </select>
+
+    <select id="selectBackup" resultMap="rsResultMap">
+        select *from hotel.backup;
+    </select>
+
+
+</mapper>
